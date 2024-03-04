@@ -1,0 +1,8 @@
+first:i used react_bootstrap directly instead of bootsrap to make the code much easier to write components and to understand
+second:i had issues with deleting tasks but with debugging i managed to solve it due to id problem in the console
+third:all the tasks needed for this assignment works well
+
+difficulties:
+    I encountered some difficulties in rearranging the code into multiple components as I intended,
+    mainly due to the constraints of my work schedule and ongoing university projects.
+    I hope you understand.
