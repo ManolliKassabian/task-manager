@@ -132,7 +132,12 @@ function handleTabChange() {
           )}
           </Tab>
         </Tabs>
-        {loading && <Spinner animation="border" variant="primary" />}
+        {loading && (
+          <div className="spinner-container">
+            <Spinner animation="border" variant="primary" />
+          </div>
+          )}
+
         </>
       );
  
