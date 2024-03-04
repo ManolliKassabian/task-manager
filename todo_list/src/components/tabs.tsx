@@ -105,7 +105,8 @@ function handleTabChange() {
         <input className='me-2'  
           onClick={handleCheckboxChange} defaultChecked={false}
           id={index.toString()} type="checkbox" />
-      <Button className='me-2'  id={index.toString()} onClick={deleteActiveTask} variant="danger" ><i className="bi bi-trash" ></i></Button>
+      <i id={index.toString()} onClick={deleteActiveTask} className="bi bi-trash" ></i>
+
       </ListGroup.Item>
       ) )}
       </ListGroup>
@@ -124,7 +125,7 @@ function handleTabChange() {
        <input className='me-2'  
         onClick={handleCheckboxChange} defaultChecked={true}
         id={index.toString()} type="checkbox" />
-      <Button className='me-2'  id={index.toString()} onClick={deleteCompletedTask} variant="danger" ><i className="bi bi-trash" ></i></Button>
+      <i id={index.toString()} onClick={deleteCompletedTask} className="bi bi-trash" ></i>
     </ListGroup.Item>
   ) )}
       </ListGroup>
