@@ -4,6 +4,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { useState } from 'react';
+import ListGroup from 'react-bootstrap/ListGroup';
+import './tabs.css';
 
 export interface ITasks{
   activeTasks?:string[]; 
@@ -55,53 +57,58 @@ else if(!event.target.checked && completedTasks){
   deleteCompletedTask(event);
   event.target.checked=!event.target.checked;
 }
+
 };
     return (
         <Tabs
           defaultActiveKey="profile"
           id="uncontrolled-tab-example"
           className="mb-3"
-          
         >
-          <Tab eventKey="activeTasks" title="Active Tasks">
+        <Tab eventKey="activeTasks" title="Active Tasks">
           <div className='col-md-3'>
-          <InputGroup className="mb-3">
-        <Form.Control
-          placeholder="Add a Task"
-          aria-label="Add a Task"
-          aria-describedby="Add a Task"
-          onChange={handleInputChange}      
-          value={newTask}
-
-        />
-        <Button disabled={newTask?false:true} onClick={addNewTask} variant="outline-secondary" id="addTask">
-          Create
-        </Button>
-      </InputGroup>
-       </div>
-      {noActiveTasks()}
-          <ul>
-          {activeTasks?.map((item:string, index:number) => (
-          <li className='d-flex align-items-center mb-2' key={index}><p className='me-2 mb-0'>{item}</p>
-          <input className='me-2'     
-        onClick={handleCheckboxChange} defaultChecked={false}
-    id={index.toString()} type="checkbox" />
-           <Button className='me-2' id={index.toString()} onClick={deleteActiveTask} variant="danger" ><i className="bi bi-trash"></i></Button>
-          </li>
-        ))}</ul>
+            <InputGroup className="mb-3">
+               <Form.Control
+                placeholder="Add a Task"
+                aria-label="Add a Task"
+                aria-describedby="Add a Task"
+                onChange={handleInputChange}      
+                value={newTask}
+                />
+              <Button disabled={newTask?false:true} onClick={addNewTask} variant="primary" id="addTask">
+              Create
+              </Button>
+            </InputGroup>
+          </div>
+        {noActiveTasks()}
         
-          </Tab>
-          <Tab eventKey="completedTasks" title="Completed Tasks">
+    <ListGroup >       
+      {activeTasks?.map((item:string, index:number) => (
+      <ListGroup.Item className="custom-list-item"  key={index} >
+        <p>{item}</p>
+        <p>check if completed</p>
+        <input className='me-2'  
+          onClick={handleCheckboxChange} defaultChecked={false}
+          id={index.toString()} type="checkbox" />
+      <Button className='me-2'  id={index.toString()} onClick={deleteActiveTask} variant="danger" ><i className="bi bi-trash" ></i></Button>
+      </ListGroup.Item>
+      ) )}
+      </ListGroup>
+         </Tab>
+        <Tab eventKey="completedTasks" title="Completed Tasks">
           {noCompletedTasks()}
-          <ul>
-           {completedTasks?.map((item,index) => (
-           <li key={index}>{item}  
-           <input    
+          <ListGroup >
+        {completedTasks?.map((item,index) => (
+    <ListGroup.Item className="custom-list-item"  key={index} >
+        <p>{item}</p>
+        <p>uncheck if not completed</p>
+       <input className='me-2'  
         onClick={handleCheckboxChange} defaultChecked={true}
-       id={index.toString()} type="checkbox" />
-                 <Button  id={index.toString()} onClick={deleteCompletedTask} variant="danger"><i className="bi bi-trash"></i></Button>
-           </li>   
-         ))}</ul>
+        id={index.toString()} type="checkbox" />
+      <Button className='me-2'  id={index.toString()} onClick={deleteCompletedTask} variant="danger" ><i className="bi bi-trash" ></i></Button>
+    </ListGroup.Item>
+  ) )}
+      </ListGroup>
           </Tab>
         </Tabs>
       );

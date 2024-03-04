@@ -1,0 +1,12 @@
+.custom-list-item {
+    background-color: #f0f0f0;
+
+  }
+  .custom-list-item:hover {
+    background-color: #59cdff;
+     
+  }
+  .border{
+    border: 5px;
+  }
+ 
