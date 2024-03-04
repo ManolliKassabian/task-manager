@@ -6,6 +6,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import { useState } from 'react';
 import ListGroup from 'react-bootstrap/ListGroup';
 import './tabs.css';
+import Spinner from 'react-bootstrap/Spinner';
 
 export interface ITasks{
   activeTasks?:string[]; 
@@ -15,6 +16,7 @@ const TabsComponent = (props:ITasks) => {
   const [newTask, setNewTask] = useState('');
   const [activeTasks, setActiveTasks] = useState(props.activeTasks);
   const [completedTasks, setCompletedTasks] = useState(props.completedTasks);
+  const [loading, setLoading] = useState(false);
 
    const handleInputChange = (event:any) => {
     setNewTask(event.target.value);
@@ -30,12 +32,13 @@ const noActiveTasks = () => {
   
 }
 const noCompletedTasks = () => {
-  if (activeTasks?.length==0) {
+  if (completedTasks?.length==0) {
     return <p>No Completed tasks</p>;
   } 
   
 }
 function deleteCompletedTask(event:any){
+  console.log(event.target.id)
   setCompletedTasks(completedTasks?.filter((_item, index) => 
   index != event.target.id));}
 
@@ -59,14 +62,26 @@ else if(!event.target.checked && completedTasks){
 }
 
 };
+function handleTabChange() {
+  setLoading(true);
+  setTimeout(() => {
+    setLoading(false);
+  }, 1000);
+}
+
     return (
+      <>
         <Tabs
           defaultActiveKey="profile"
           id="uncontrolled-tab-example"
           className="mb-3"
+          onSelect={handleTabChange}
+          
         >
         <Tab eventKey="activeTasks" title="Active Tasks">
-          <div className='col-md-3'>
+           {!loading && (
+            <>
+          <div className='col-md-3' >
             <InputGroup className="mb-3">
                <Form.Control
                 placeholder="Add a Task"
@@ -94,9 +109,13 @@ else if(!event.target.checked && completedTasks){
       </ListGroup.Item>
       ) )}
       </ListGroup>
+        </>
+           )}
          </Tab>
         <Tab eventKey="completedTasks" title="Completed Tasks">
           {noCompletedTasks()}
+          {!loading && (
+            <>
           <ListGroup >
         {completedTasks?.map((item,index) => (
     <ListGroup.Item className="custom-list-item"  key={index} >
@@ -109,8 +128,12 @@ else if(!event.target.checked && completedTasks){
     </ListGroup.Item>
   ) )}
       </ListGroup>
+        </>
+          )}
           </Tab>
         </Tabs>
+        {loading && <Spinner animation="border" variant="primary" />}
+        </>
       );
  
  

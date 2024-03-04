@@ -3,7 +3,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TabsComponent, { ITasks } from './components/tabs';
 const App = () => {
-  const tasks:ITasks = {activeTasks:[],completedTasks:[]};
+  const tasks:ITasks = {activeTasks:['first','second'],completedTasks:['third','last']};
 
   return (   
      <div>
